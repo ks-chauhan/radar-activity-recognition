@@ -56,12 +56,15 @@ doi={10.1117/12.2559155}
 ## 🔍 API Reference
 
 Initialize predictor
+
 predictor = RadarPredictor()
 
 Single prediction
+
 results = predictor.predict(image_path, return_probabilities=True, top_k=3)
 
 Batch prediction
+
 batch_results = predictor.predict_batch(image_list)
 
 
