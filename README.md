@@ -23,7 +23,9 @@ Away, Bend, Crawl, Kneel, Limp, Pick, SStep, Scissor, Sit, Toes, Towards
 ### Installation
 
 git clone https://github.com/ks-chauhan/radar-activity-recognition.git
+
 cd radar-activity-recognition
+
 pip install -r requirements.txt
 
 
