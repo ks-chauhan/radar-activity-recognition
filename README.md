@@ -1,24 +1,24 @@
 # Radar Activity Recognition
 
 
-## 🎯 Overview
+##  Overview
 
 A complete pipeline for human activity recognition using radar Range-Doppler (RD) Map images from the **CI4R-MULTI3** dataset. Achieves **90.42% accuracy** on 11 human activities using a ResNet18-based architecture.
 
-## 📊 Performance
+##  Performance
 
 - **Accuracy**: 90.42%
 - **Classes**: 11 activities
 - **Model**: PowerfulRadarNet128 (11.3M parameters)
 - **Input Size**: 128×128 RGB images
 
-## 🏷️ Activity Classes
+##  Activity Classes
 
 The model recognizes 11 activities from the CI4R-MULTI3 dataset:
 
 Away, Bend, Crawl, Kneel, Limp, Pick, SStep, Scissor, Sit, Toes, Towards
 
-## 🚀 Quick Start
+##  Quick Start
 
 ### Installation
 
@@ -40,7 +40,7 @@ predictor = RadarPredictor()
 results = predictor.predict("rd_map.png")
 print(f"Activity: {results['predicted_class']} ({results['percentage']})")
 
-## 📚 Citation
+##  Citation
 
 ### Dataset
 
@@ -53,7 +53,7 @@ doi={10.1117/12.2559155}
 }
 
 
-## 🔍 API Reference
+##  API Reference
 
 Initialize predictor
 
@@ -68,11 +68,11 @@ Batch prediction
 batch_results = predictor.predict_batch(image_list)
 
 
-## 📄 License
+##  License
 
 MIT License. Dataset usage subject to CI4R-MULTI3 terms.
 
-## 🙏 Acknowledgments
+##  Acknowledgments
 
 - **Dataset**: [CI4R-MULTI3](https://github.com/ci4r/CI4R-MULTI3) multi-frequency radar dataset
 - **Research**: Laboratory of Computational Intelligence for RADAR (CI4R)
