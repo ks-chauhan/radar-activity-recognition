@@ -89,46 +89,5 @@ def main():
         sys.exit(1)
 
 
-def demo_batch_inference():
-    """Demo function for batch inference"""
-    try:
-        # Initialize predictor
-        predictor = RadarPredictor()
-        visualizer = RadarVisualizer()
-        
-        # Example with multiple images (replace with actual paths)
-        image_paths = [
-            "path/to/rd_map_1.png",
-            "path/to/rd_map_2.png", 
-            "path/to/rd_map_3.png"
-        ]
-        
-        # Filter existing paths
-        existing_paths = [p for p in image_paths if Path(p).exists()]
-        
-        if not existing_paths:
-            print(" No valid image paths found for batch demo")
-            return
-        
-        print(f" Running batch inference on {len(existing_paths)} images...")
-        
-        # Batch prediction
-        batch_results = predictor.predict_batch(existing_paths, return_probabilities=True)
-        
-        # Display results
-        for i, (path, result) in enumerate(zip(existing_paths, batch_results)):
-            print(f"\n Image {i+1}: {Path(path).name}")
-            print(f" Predicted: {result['predicted_class']} ({result['percentage']})")
-        
-        # Visualize batch results
-        visualizer.plot_batch_results(batch_results, save_path="batch_predictions.png")
-        
-    except Exception as e:
-        print(f" Error during batch inference: {str(e)}")
-
-
 if __name__ == "__main__":
-    if len(sys.argv) > 1 and sys.argv[1] == "demo":
-        demo_batch_inference()
-    else:
-        main()
+    main()
