@@ -15,7 +15,6 @@ class RDMapPreprocessor:
     def __init__(self, target_size=128):
         """
         Initialize preprocessor
-        
         Args:
             target_size (int): Target image size for model input
         """
@@ -33,14 +32,12 @@ class RDMapPreprocessor:
     
     def preprocess_image(self, image_input):
         """
-        Preprocess various types of image inputs
-        
+        Preprocess various types of image inputs 
         Args:
             image_input: Can be:
                 - str/Path: path to image file
                 - numpy array: image array
                 - PIL Image: PIL image object
-        
         Returns:
             tuple: (preprocessed_tensor, original_image, original_array)
         """
@@ -110,12 +107,8 @@ class RDMapPreprocessor:
     def batch_preprocess(self, image_list):
         """
         Preprocess a batch of images
-        
-        Args:
-            image_list (list): List of image inputs
-            
-        Returns:
-            tuple: (batch_tensor, original_images_list)
+        Args: image_list (list): List of image inputs
+        Returns: tuple: (batch_tensor, original_images_list)
         """
         batch_tensors = []
         original_images = []

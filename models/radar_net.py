@@ -41,7 +41,7 @@ class PowerfulRadarNet128(nn.Module):
         self._initialize_weights()
     
     def _initialize_weights(self):
-        """Initialize classifier weights with Kaiming normal"""
+        """Initialize classifier weights"""
         for m in self.classifier:
             if isinstance(m, nn.Linear):
                 nn.init.kaiming_normal_(m.weight, mode='fan_out', nonlinearity='relu')
@@ -73,10 +73,10 @@ class PowerfulRadarNet128(nn.Module):
         """
         features = {}
         
-        # Extract features from different ResNet layers
+        # Extracting features from different ResNet layers
         for i, layer in enumerate(self.backbone):
             x = layer(x)
-            if i in [4, 5, 6, 7]:  # Conv layers
+            if i in [4, 5, 6, 7]:  # Convolution layers
                 features[f'layer_{i}'] = x
         
         return features

@@ -31,14 +31,8 @@ pip install -r requirements.txt
 
 ### Usage
 
-Single prediction
-python main.py "path/to/rd_map.png" --save-viz
+For Single prediction - python main.py "path/to/rd_map.png" --save-viz
 
-Python API
-from inference import RadarPredictor
-predictor = RadarPredictor()
-results = predictor.predict("rd_map.png")
-print(f"Activity: {results['predicted_class']} ({results['percentage']})")
 
 ##  Citation
 
