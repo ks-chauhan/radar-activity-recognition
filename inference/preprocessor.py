@@ -5,7 +5,6 @@ import torch
 import torchvision.transforms as transforms
 from PIL import Image
 import numpy as np
-import cv2
 from pathlib import Path
 
 
@@ -20,7 +19,7 @@ class RDMapPreprocessor:
         """
         self.target_size = target_size
         
-        # Define transforms (same as training)
+        # Define transforms
         self.transform = transforms.Compose([
             transforms.Resize((target_size, target_size), antialias=True),
             transforms.ToTensor(),
@@ -52,23 +51,20 @@ class RDMapPreprocessor:
                 original_img = Image.open(image_path).convert('RGB')
                 
             elif isinstance(image_input, np.ndarray):
-                # Convert numpy array to PIL
                 original_array = image_input.copy()
                 
-                if image_input.dtype == np.uint8:
-                    if len(image_input.shape) == 3:
-                        original_img = Image.fromarray(image_input)
-                    else:
-                        # Convert grayscale to RGB
-                        rgb_array = cv2.cvtColor(image_input, cv2.COLOR_GRAY2RGB)
-                        original_img = Image.fromarray(rgb_array)
+                # Handle grayscale arrays
+                if len(image_input.shape) == 2:
+                    original_img = Image.fromarray(image_input).convert("RGB")
+                # RGB arrays
+                elif image_input.dtype == np.uint8 and len(image_input.shape) == 3:
+                    original_img = Image.fromarray(image_input)
+                # Float arrays — normalize & convert
                 else:
-                    # Normalize to 0-255 if needed
                     img_normalized = self._normalize_array(image_input)
                     original_img = Image.fromarray(img_normalized)
                 
             elif isinstance(image_input, Image.Image):
-                # Already a PIL image
                 original_img = image_input.convert('RGB')
                 
             else:
@@ -89,18 +85,16 @@ class RDMapPreprocessor:
             raise RuntimeError(f"Error preprocessing image: {str(e)}")
     
     def _normalize_array(self, array):
-        """Normalize array to 0-255 uint8 range"""
+        """Normalize array to 0-255 uint8 range (OpenCV-free)"""
         if array.max() <= 1.0:
-            # Assume it's already normalized
             normalized = (array * 255).astype(np.uint8)
         else:
-            # Normalize using min-max
             normalized = ((array - array.min()) / 
-                         (array.max() - array.min()) * 255).astype(np.uint8)
+                          (array.max() - array.min()) * 255).astype(np.uint8)
         
-        # Convert to RGB if grayscale
+        # Convert grayscale → RGB
         if len(normalized.shape) == 2:
-            normalized = cv2.cvtColor(normalized, cv2.COLOR_GRAY2RGB)
+            normalized = np.stack([normalized] * 3, axis=-1)
         
         return normalized
     
