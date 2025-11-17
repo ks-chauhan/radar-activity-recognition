@@ -91,6 +91,7 @@ class RadarPredictor:
                 - top_k_predictions: List of top-k predictions
                 - probabilities: Class probabilities (if requested)
         """
+        
         try:
             # Preprocess image
             input_tensor, original_img, original_array = self.preprocessor.preprocess_image(image_input)

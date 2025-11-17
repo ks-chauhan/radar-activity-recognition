@@ -4,7 +4,7 @@ Configuration settings for radar inference
 import os
 from pathlib import Path
 
-
+# System Configurations
 class Config:
     """Configuration class for radar inference pipeline"""
     
